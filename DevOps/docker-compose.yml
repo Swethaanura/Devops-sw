@@ -1,0 +1,29 @@
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: mysql
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  mysite:
+    build: .
+    container_name: mysite
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root123
+      MYSQL_DB: mysql
+
+volumes:
+  mysql-data:
