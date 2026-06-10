@@ -3,9 +3,9 @@ name: devops app
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "pipeline-branch" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "pipeline-branch" ]
 
 permissions:
   id-token: write
