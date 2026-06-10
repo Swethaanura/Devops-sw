@@ -38,3 +38,7 @@ def db_check():
         return jsonify(status="connected", mysql_version=version, host="mysql")
     except Exception as e:
         return jsonify(status="error", message=str(e)), 500
+    
+@app.route('/version')
+def version():
+    return jsonify({"version": "1.0"})    
