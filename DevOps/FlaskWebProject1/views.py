@@ -41,4 +41,4 @@ def db_check():
     
 @app.route('/version')
 def version():
-    return jsonify({"version": "1.0"})    
+    return jsonify({"version": "2.0"})    
