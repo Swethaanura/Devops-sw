@@ -2,9 +2,9 @@ name: swetha pipeline
 
 on:
   push:
-    branches: ["main", "pipeline-branch"]
+    branches: [ "main", "pipeline-branch" ]
   pull_request:
-    branches: ["main", "pipeline-branch"]
+    branches: [ "main", "pipeline-branch" ]
 
 jobs:
   build:
@@ -20,9 +20,9 @@ jobs:
           python-version: "3.9"
 
       - name: Install Dependencies
-  run: |
-    python -m pip install --upgrade pip
-    pip install -r DevOps/requirements.txt 
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r DevOps/requirements.txt
 
       - name: Run Tests
         run: |
@@ -45,5 +45,5 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/swetha-app:latest .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/swetha-app:latest ./DevOps
           docker push ${{ secrets.DOCKER_USERNAME }}/swetha-app:latest
