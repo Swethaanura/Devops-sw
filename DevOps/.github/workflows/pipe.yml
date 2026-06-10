@@ -2,9 +2,9 @@ name: swetha pipeline
 
 on:
   push:
-    branches: [ "main", "pipeline-branch" ]
+    branches: ["main", "pipeline-branch"]
   pull_request:
-    branches: [ "main", "pipeline-branch" ]
+    branches: ["main", "pipeline-branch"]
 
 jobs:
   build:
