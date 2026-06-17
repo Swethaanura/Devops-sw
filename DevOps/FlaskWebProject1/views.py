@@ -14,6 +14,12 @@ def get_db_connection():
     )
 
 @app.route('/')
+def root():
+    return jsonify({
+        "instance": os.environ.get("INSTANCE_NAME", "flask-app"),
+        "version": os.environ.get("APP_VERSION", "1.0")
+    })
+
 @app.route('/home')
 def home():
     return render_template('index.html', title='Home Page', year=datetime.now().year)
@@ -38,7 +44,3 @@ def db_check():
         return jsonify(status="connected", mysql_version=version, host="mysql")
     except Exception as e:
         return jsonify(status="error", message=str(e)), 500
-    
-@app.route('/version')
-def version():
-    return jsonify({"version": "2.0"})    
