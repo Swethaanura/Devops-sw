@@ -14,6 +14,12 @@ def get_db_connection():
     )
 
 @app.route('/')
+def root():
+    return jsonify({
+        "instance": os.environ.get("INSTANCE_NAME", "flask-app"),
+        "version": os.environ.get("APP_VERSION", "1.0")
+    })
+
 @app.route('/home')
 def home():
     return render_template('index.html', title='Home Page', year=datetime.now().year)

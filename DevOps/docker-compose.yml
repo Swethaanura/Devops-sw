@@ -11,19 +11,39 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
 
-  mysite:
-    build: .
-    container_name: mysite
+  flask-app-1:
+    image: swethaanura/swetha-app:${APP1_IMAGE_TAG:-latest}
+    container_name: flask-app-1
     restart: always
     depends_on:
       - mysql
     ports:
-      - "8080:8080"
+      - "8001:8000"
     environment:
       MYSQL_HOST: mysql
       MYSQL_USER: root
       MYSQL_PASSWORD: root123
       MYSQL_DB: mysql
+      SERVER_PORT: "8000"
+      INSTANCE_NAME: flask-app-1
+      APP_VERSION: ${APP1_VERSION:-1.0}
+
+  flask-app-2:
+    image: swethaanura/swetha-app:${APP2_IMAGE_TAG:-latest}
+    container_name: flask-app-2
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - "8002:8000"
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root123
+      MYSQL_DB: mysql
+      SERVER_PORT: "8000"
+      INSTANCE_NAME: flask-app-2
+      APP_VERSION: ${APP2_VERSION:-1.0}
 
 volumes:
   mysql-data:

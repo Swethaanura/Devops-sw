@@ -1,4 +1,3 @@
-
 import pytest
 from datetime import datetime
 from FlaskWebProject1 import app
@@ -12,10 +11,18 @@ def client():
 
 def test_home_route(client):
     """Test the home route."""
-    response = client.get('/')
+    response = client.get('/home')
     assert response.status_code == 200
     assert b'Home Page' in response.data  # Check if the title exists
     assert str(datetime.now().year).encode() in response.data  # Check the year
+
+def test_root_route_returns_json(client):
+    """Test the root route returns instance/version JSON."""
+    response = client.get('/')
+    assert response.status_code == 200
+    data = response.get_json()
+    assert 'instance' in data
+    assert 'version' in data
 
 def test_home_route_alias(client):
     """Test the /home route."""
