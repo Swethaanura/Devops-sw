@@ -20,6 +20,12 @@ def root():
         "version": os.environ.get("APP_VERSION", "1.0")
     })
 
+@app.route('/version')
+def version():
+    return jsonify({
+        "version": os.environ.get("APP_VERSION", "1.0")
+    })
+
 @app.route('/home')
 def home():
     return render_template('index.html', title='Home Page', year=datetime.now().year)
